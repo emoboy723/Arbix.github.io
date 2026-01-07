@@ -3,118 +3,178 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Página larga con estilo diferente</title>
+  <title>Página moderna con scroll</title>
+
   <style>
+    :root {
+      --bg: #020617;
+      --panel: #020b2a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --primary: #3b82f6;
+      --accent: #10b981;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      background: #000509;
-      color: #1f2937;
+      font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+      background: radial-gradient(circle at top, #020b2a, #020617);
+      color: var(--text);
       line-height: 1.6;
     }
+
     header {
-      padding: 2rem;
+      padding: 3rem 1.5rem;
       text-align: center;
-      background: #000d22;
-      color: rgb(3, 0, 39);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      background: linear-gradient(180deg, #020b2a, transparent);
     }
+
+    header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: .5rem;
+    }
+
+    header p {
+      color: var(--muted);
+    }
+
     .bloque {
-      margin: 2rem auto;
-      max-width: 700px;
-      padding: 1.5rem;
-      border-radius: 12px;
-      background: rgb(2, 0, 27);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 720px;
+      margin: 3rem auto;
+      padding: 2rem;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #020b2a, #020617);
+      box-shadow: 0 10px 40px rgba(0,0,0,.4);
+      border: 1px solid rgba(255,255,255,.05);
     }
+
     .bloque h2 {
-      color: #2563eb;
+      color: var(--primary);
+      margin-top: 0;
     }
+
     .spacer {
-      height: 400vh; /* espacio largo para scroll */
-      background: linear-gradient(180deg, #f9fafb, #e0f2fe);
-      margin: 2rem 0;
+      height: 250vh;
+      background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(59,130,246,.08),
+        transparent
+      );
     }
+
     footer {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 3rem 1rem;
+      padding: 4rem 1.5rem;
       text-align: center;
-      border-top: 2px solid #000d1d;
     }
+
     button {
-      padding: 1rem 1.5rem;
+      padding: 1rem 2rem;
+      border-radius: 999px;
       border: none;
-      border-radius: 8px;
-      background: #10b981;
-      color: white;
-      font-weight: bold;
+      background: linear-gradient(135deg, var(--accent), #059669);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(16,185,129,0.3);
-      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: 0 10px 30px rgba(16,185,129,.4);
+      transition: all .25s ease;
     }
+
     button:disabled {
-      background: #000815;
-      cursor: not-allowed;
+      background: #020b2a;
       box-shadow: none;
+      cursor: not-allowed;
+      color: var(--muted);
     }
-    button:hover:enabled { transform: scale(1.05); background: #059669; }
-    button:active:enabled { transform: scale(0.95); }
+
+    button:hover:enabled { transform: translateY(-2px) scale(1.03); }
+    button:active:enabled { transform: scale(.96); }
+
+    .progress {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 1s linear;
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Página con estilo renovado</h1>
-    <p>Desplázate mucho para encontrar el botón.</p>
-  </header>
+<header>
+  <h1>Página con scroll elegante</h1>
+  <p>Baja hasta el final para desbloquear la acción</p>
+</header>
 
-  <div class="bloque">
-    <h2>Bloque 1</h2>
-    <p>Texto de prueba para alargar la página.</p>
+<div class="bloque">
+  <h2>Bloque 1</h2>
+  <p>Contenido introductorio con un diseño limpio y moderno.</p>
+</div>
+
+<div class="bloque">
+  <h2>Bloque 2</h2>
+  <p>Separación visual clara para mantener la lectura cómoda.</p>
+</div>
+
+<div class="bloque">
+  <h2>Bloque 3</h2>
+  <p>Sombras suaves y bordes redondeados para profundidad.</p>
+</div>
+
+<div class="spacer"></div>
+
+<div class="bloque">
+  <h2>Último bloque</h2>
+  <p>Ahora sí, estás a punto de desbloquear el botón.</p>
+</div>
+
+<footer>
+  <button id="cta" disabled>Disponible en 30s</button>
+
+  <div class="progress">
+    <span id="bar"></span>
   </div>
 
-  <div class="bloque">
-    <h2>Bloque 2</h2>
-    <p>Más texto de prueba para que el scroll sea largo.</p>
-  </div>
+  <p class="muted">Gracias por llegar hasta el final 🚀</p>
+</footer>
 
-  <div class="bloque">
-    <h2>Bloque 3</h2>
-    <p>Contenido adicional para extender la página.</p>
-  </div>
+<script>
+  const btn = document.getElementById("cta");
+  const bar = document.getElementById("bar");
 
-  <div class="spacer"></div>
+  let tiempo = 30;
+  btn.textContent = `Disponible en ${tiempo}s`;
 
-  <div class="bloque">
-    <h2>Último bloque</h2>
-    <p>Ya casi llegas al botón.</p>
-  </div>
+  const intervalo = setInterval(() => {
+    tiempo--;
+    btn.textContent = `Disponible en ${tiempo}s`;
+    bar.style.width = `${((30 - tiempo) / 30) * 100}%`;
 
-  <footer>
-    <button id="cta" disabled>Botón disponible en 30s</button>
-    <p>¡Llegaste al final!</p>
-  </footer>
+    if (tiempo <= 0) {
+      clearInterval(intervalo);
+      btn.disabled = false;
+      btn.textContent = "Continuar";
+      bar.style.width = "100%";
+    }
+  }, 1000);
 
-  <script>
-    const btn = document.getElementById('cta');
-    let tiempo = 30;
-
-    btn.disabled = true;
-    btn.textContent = `Botón disponible en ${tiempo}s`;
-
-    const intervalo = setInterval(() => {
-      tiempo--;
-      btn.textContent = `Botón disponible en ${tiempo}s`;
-      if (tiempo <= 0) {
-        clearInterval(intervalo);
-        btn.disabled = false;
-        btn.textContent = "Botón al fondo";
-      }
-    }, 1000);
-
-    btn.addEventListener('click', () => {
-      alert('¡Has presionado el botón al fondo!');
-    });
-  </script>
+  btn.addEventListener("click", () => {
+    alert("¡Acción desbloqueada!");
+  });
+</script>
 </body>
 </html>
