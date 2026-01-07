@@ -1,180 +1,210 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Página moderna con scroll</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Página con Glow</title>
 
-  <style>
-    :root {
-      --bg: #020617;
-      --panel: #020b2a;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --primary: #3b82f6;
-      --accent: #10b981;
-    }
+<style>
+:root {
+  --bg: #020617;
+  --panel: #020b2a;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #3b82f6;
+  --accent: #10b981;
+}
 
-    * { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, sans-serif;
-      background: radial-gradient(circle at top, #020b2a, #020617);
-      color: var(--text);
-      line-height: 1.6;
-    }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+  background: radial-gradient(circle at top, #020b2a, var(--bg));
+  color: var(--text);
+  overflow-x: hidden;
+}
 
-    header {
-      padding: 3rem 1.5rem;
-      text-align: center;
-      background: linear-gradient(180deg, #020b2a, transparent);
-    }
+/* HEADER */
+header {
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  background: linear-gradient(180deg, #020b2a, transparent);
+  box-shadow: 0 0 60px rgba(59,130,246,.15);
+}
 
-    header h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      margin-bottom: .5rem;
-    }
+header h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  margin-bottom: .5rem;
+  text-shadow: 0 0 20px rgba(59,130,246,.4);
+}
 
-    header p {
-      color: var(--muted);
-    }
+header p {
+  color: var(--muted);
+}
 
-    .bloque {
-      max-width: 720px;
-      margin: 3rem auto;
-      padding: 2rem;
-      border-radius: 16px;
-      background: linear-gradient(180deg, #020b2a, #020617);
-      box-shadow: 0 10px 40px rgba(0,0,0,.4);
-      border: 1px solid rgba(255,255,255,.05);
-    }
+/* BLOQUES */
+.bloque {
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 2.2rem;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--panel), var(--bg));
+  border: 1px solid rgba(255,255,255,.05);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.5),
+    0 0 30px rgba(59,130,246,.12);
+  position: relative;
+}
 
-    .bloque h2 {
-      color: var(--primary);
-      margin-top: 0;
-    }
+.bloque::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,.25), transparent);
+  opacity: .2;
+  pointer-events: none;
+}
 
-    .spacer {
-      height: 250vh;
-      background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(59,130,246,.08),
-        transparent
-      );
-    }
+.bloque h2 {
+  color: var(--primary);
+  margin-top: 0;
+  text-shadow: 0 0 12px rgba(59,130,246,.6);
+}
 
-    footer {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem;
-      text-align: center;
-    }
+/* SPACER (FIX CUADRO BLANCO) */
+.spacer {
+  height: 250vh;
+  background: linear-gradient(
+    180deg,
+    var(--bg),
+    rgba(59,130,246,.10),
+    var(--bg)
+  );
+}
 
-    button {
-      padding: 1rem 2rem;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, var(--accent), #059669);
-      color: #fff;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(16,185,129,.4);
-      transition: all .25s ease;
-    }
+/* FOOTER */
+footer {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
 
-    button:disabled {
-      background: #020b2a;
-      box-shadow: none;
-      cursor: not-allowed;
-      color: var(--muted);
-    }
+/* BOTÓN */
+button {
+  padding: 1.1rem 2.4rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), #059669);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 0 20px rgba(16,185,129,.6),
+    0 10px 40px rgba(16,185,129,.4);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
 
-    button:hover:enabled { transform: translateY(-2px) scale(1.03); }
-    button:active:enabled { transform: scale(.96); }
+button:disabled {
+  background: #020b2a;
+  box-shadow: none;
+  color: var(--muted);
+  cursor: not-allowed;
+}
 
-    .progress {
-      width: 100%;
-      height: 6px;
-      background: rgba(255,255,255,.08);
-      border-radius: 999px;
-      margin: 1.5rem 0;
-      overflow: hidden;
-    }
+button:hover:enabled {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:
+    0 0 30px rgba(16,185,129,.9),
+    0 14px 50px rgba(16,185,129,.6);
+}
 
-    .progress span {
-      display: block;
-      height: 100%;
-      background: var(--accent);
-      width: 0%;
-      transition: width 1s linear;
-    }
-  </style>
+button:active:enabled {
+  transform: scale(.96);
+}
+
+/* PROGRESS */
+.progress {
+  width: 100%;
+  height: 6px;
+  margin: 1.8rem 0;
+  background: rgba(255,255,255,.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress span {
+  height: 100%;
+  display: block;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #34d399);
+  box-shadow: 0 0 20px rgba(16,185,129,.8);
+  transition: width 1s linear;
+}
+</style>
 </head>
 
 <body>
+
 <header>
-  <h1>Página con scroll elegante</h1>
-  <p>Baja hasta el final para desbloquear la acción</p>
+  <h1>Página con Glow</h1>
+  <p>Scroll largo + efecto visual limpio</p>
 </header>
 
 <div class="bloque">
   <h2>Bloque 1</h2>
-  <p>Contenido introductorio con un diseño limpio y moderno.</p>
+  <p>Diseño oscuro con glow elegante.</p>
 </div>
 
 <div class="bloque">
   <h2>Bloque 2</h2>
-  <p>Separación visual clara para mantener la lectura cómoda.</p>
+  <p>Sombras suaves y profundidad real.</p>
 </div>
 
 <div class="bloque">
   <h2>Bloque 3</h2>
-  <p>Sombras suaves y bordes redondeados para profundidad.</p>
+  <p>Compatible con todos los navegadores.</p>
 </div>
 
 <div class="spacer"></div>
 
 <div class="bloque">
   <h2>Último bloque</h2>
-  <p>Ahora sí, estás a punto de desbloquear el botón.</p>
+  <p>Desbloquea el botón abajo.</p>
 </div>
 
 <footer>
   <button id="cta" disabled>Disponible en 30s</button>
-
-  <div class="progress">
-    <span id="bar"></span>
-  </div>
-
-  <p class="muted">Gracias por llegar hasta el final 🚀</p>
+  <div class="progress"><span id="bar"></span></div>
 </footer>
 
 <script>
-  const btn = document.getElementById("cta");
-  const bar = document.getElementById("bar");
+const btn = document.getElementById("cta");
+const bar = document.getElementById("bar");
 
-  let tiempo = 30;
+let tiempo = 30;
+btn.textContent = `Disponible en ${tiempo}s`;
+
+const intervalo = setInterval(() => {
+  tiempo--;
   btn.textContent = `Disponible en ${tiempo}s`;
+  bar.style.width = `${((30 - tiempo) / 30) * 100}%`;
 
-  const intervalo = setInterval(() => {
-    tiempo--;
-    btn.textContent = `Disponible en ${tiempo}s`;
-    bar.style.width = `${((30 - tiempo) / 30) * 100}%`;
+  if (tiempo <= 0) {
+    clearInterval(intervalo);
+    btn.disabled = false;
+    btn.textContent = "Continuar";
+    bar.style.width = "100%";
+  }
+}, 1000);
 
-    if (tiempo <= 0) {
-      clearInterval(intervalo);
-      btn.disabled = false;
-      btn.textContent = "Continuar";
-      bar.style.width = "100%";
-    }
-  }, 1000);
-
-  btn.addEventListener("click", () => {
-    alert("¡Acción desbloqueada!");
-  });
+btn.onclick = () => alert("Glow desbloqueado 🔥");
 </script>
+
 </body>
 </html>
